@@ -1,0 +1,17 @@
+{
+  "name": "botstuff",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "express": "^4.19.2",
+    "http-server": "^0.12.3",
+    "ws": "^8.17.0"
+  }
+}

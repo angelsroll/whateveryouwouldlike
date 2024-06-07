@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "dependencies": {
+    "types-registry": "^0.1.685"
+  },
+  "devDependencies": {
+    "@types/combined-stream": "^1.0.4",
+    "@types/follow-redirects": "^1.14.1",
+    "@types/mime-db": "^1.43.1",
+    "@types/mime-types": "^2.1.1",
+    "@types/node-fetch": "^2.6.4",
+    "@types/proxy-from-env": "^1.0.1",
+    "@types/tr46": "^3.0.1",
+    "@types/webidl-conversions": "^7.0.0",
+    "@types/whatwg-url": "^11.0.0",
+    "@types/ws": "^8.5.5"
+  }
+}

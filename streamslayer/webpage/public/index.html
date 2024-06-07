@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="canvas-container">
+    <canvas id="canvas"></canvas>
+    <div id="logBackground">
+      <div id="logHeader">Battle Log</div>
+    </div>
+  </div>
+  <button id="actionButton">Click me</button>
+  <script src="canvas.js"></script>
+  <script src="overlay.js"></script>
+  <script>
+    const ws = new WebSocket('ws://localhost:3000');
+
+    ws.onmessage = (event) => {
+        const message = JSON.parse(event.data);
+        if (message.action === 'update') {
+            // Replace this alert with the action you want to trigger
+            alert('Action triggered: ' + message.content);
+        }
+    };
+
+    document.getElementById('actionButton').addEventListener('click', () => {
+      alert('Button clicked!');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+#canvas-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  canvas {
+    border: 1px solid #8f0000;
+    display: block;
+  }
+  
+  #logBackground {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Changed transparency to 40% */
+    border-left: 4px solid black; /* Changed border width to 4pt */
+  }
+  
+  #logHeader {
+    text-align: center;
+    color: white;
+    background-color: black;
+    padding: 5px;
+  }
