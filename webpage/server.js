@@ -1,11 +1,15 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const http = require('http');
-const WebSocket = require('ws');
+const { createServer } = require('node:http');
+const { Server: SocketIOServer } = require('socket.io');
+
 
 const app = express();
 const PORT = 3000;
+
+const server = createServer(app);
+const io = new SocketIOServer(server);
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -16,22 +20,15 @@ app.get('/', (req, res) => {
     res.send(webpageContent);
 });
 
-const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
-
-wss.on('connection', ws => {
+io.on('connection', socket => {
     console.log('Client connected');
-    ws.on('message', message => {
-        console.log('Received:', message);
+    socket.on('disconnect', message => {
+        console.log('Client disconnected');
     });
 });
 
 function broadcast(data) {
-    wss.clients.forEach(client => {
-        if (client.readyState === WebSocket.OPEN) {
-            client.send(JSON.stringify(data));
-        }
-    });
+    io.send("general", data)
 }
 
 app.post('/update', (req, res) => {
