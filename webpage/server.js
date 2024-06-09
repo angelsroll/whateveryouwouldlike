@@ -28,7 +28,7 @@ io.on('connection', socket => {
 });
 
 function broadcast(data) {
-    io.send("general", data)
+    io.emit('runMove')
 }
 
 app.post('/update', (req, res) => {

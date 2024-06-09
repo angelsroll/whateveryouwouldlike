@@ -49,7 +49,7 @@ client.on('messageCreate', async (message) => {
       case 'a':
         console.log('Received !a command');
         if (ws.readyState === WebSocket.OPEN) {
-            ws.send(JSON.stringify({ action: 'update', content: 'Triggered by !a command' }));
+            ws.send(JSON.stringify({ action: 'runMove', content: 'Triggered by !a command' }));
             message.channel.send('Action triggered!');
         } else {
             message.channel.send('Failed to trigger action.');
