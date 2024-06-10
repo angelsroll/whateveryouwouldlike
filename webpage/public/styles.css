@@ -1,26 +1,39 @@
 #canvas-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  canvas {
-    border: 1px solid #8f0000;
-    display: block;
-  }
-  
-  #logBackground {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Changed transparency to 40% */
-    border-left: 4px solid black; /* Changed border width to 4pt */
-  }
-  
-  #logHeader {
-    text-align: center;
-    color: white;
-    background-color: black;
-    padding: 5px;
-  }
+  position: relative;
+  display: inline-block;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1080px;
+  z-index: -1; /* Ensure background is at the bottom layer */
+  border: 1px solid #8f0000;
+  display: block;
+}
+
+#moveButton {
+  position: absolute;
+  top: 10px; /* Adjust as needed */
+  left: 10px; /* Adjust as needed */
+  z-index: 10; /* Ensure the button is on top */
+}
+
+#logBackground {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Changed transparency to 40% */
+  border-left: 4px solid black; /* Changed border width to 4pt */
+}
+
+#logHeader {
+  text-align: center;
+  color: white;
+  background-color: black;
+  padding: 5px;
+}
