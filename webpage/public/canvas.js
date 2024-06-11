@@ -8,8 +8,8 @@ canvas.height = 1080; // Fullscreen height
 const baseImageSrc = './assets/images/boss1.jpg';
 const overlayImageSrc = './assets/images/starter-sword.png';
 
-const rotationSpeedNormal = 0.2; // Radians per frame
-const rotationSpeedCritical = 0.1; // Radians per frame for critical hit
+const rotationSpeedNormal = 0.1; // Radians per frame
+const rotationSpeedCritical = 0.05; // Radians per frame for critical hit
 const overlays = [];
 let animationFrameId;
 

@@ -1,5 +1,5 @@
 let battleLog = [];
-const initialHealth = 100; // Initial health value
+const initialHealth = 1000; // Initial health value
 let currentHealth = initialHealth; // Current health value
 
 document.getElementById("moveButton").addEventListener("click", () => {
@@ -35,6 +35,15 @@ document.getElementById("moveButton").addEventListener("click", () => {
     shakeDuration = 20; // Adjusted duration of the shake
     cancelAnimationFrame(animationFrameId);
     animateOverlay();
+
+    // Play sound based on hit type
+    if (criticalHit) {
+        const criticalHitSound = new Audio('assets/audio/critical.wav');
+        criticalHitSound.play();
+    } else {
+        const regularHitSound = new Audio('assets/audio/normal.wav');
+        regularHitSound.play();
+    }
 
     // Add log entry
     const logEntry = `Player dealt ${numberToDisplay} damage`;
@@ -173,8 +182,8 @@ function updateHealthBar() {
     const barY = 60; // Top margin for the bar, just below the battle log header
     ctx.clearRect(barX + 15, barY + 15, barWidth - 30, barHeight - 30);
 
-    // Draw the green portion of the health bar
-    ctx.fillStyle = 'green';
+    // Draw the red portion of the health bar
+    ctx.fillStyle = 'red';
     ctx.beginPath();
     ctx.moveTo(barX + 15, barY);
     ctx.arcTo(barX + barWidth, barY, barX + barWidth, barY + barHeight, 15);
@@ -183,15 +192,17 @@ function updateHealthBar() {
     ctx.arcTo(barX, barY, barX + 15, barY, 15);
     ctx.fill();
 
-    // Draw the red damage portion of the health bar
-    const damageWidth = barWidth * (1 - healthPercentage);
-    ctx.fillStyle = 'red';
+    // Calculate the width of the remaining health bar
+    const remainingWidth = barWidth * healthPercentage;
+
+    // Draw the green damage portion of the health bar
+    ctx.fillStyle = 'green';
     ctx.beginPath();
-    ctx.moveTo(barX + barWidth - damageWidth + 15, barY);
-    ctx.arcTo(barX + barWidth, barY, barX + barWidth, barY + barHeight, 15);
-    ctx.arcTo(barX + barWidth, barY + barHeight, barX + barWidth - damageWidth, barY + barHeight, 15);
-    ctx.arcTo(barX + barWidth - damageWidth, barY + barHeight, barX + barWidth - damageWidth, barY, 15);
-    ctx.arcTo(barX + barWidth - damageWidth, barY, barX + barWidth - damageWidth + 15, barY, 15);
+    ctx.moveTo(barX + 15, barY);
+    ctx.arcTo(barX + remainingWidth, barY, barX + remainingWidth, barY + barHeight, 15);
+    ctx.arcTo(barX + remainingWidth, barY + barHeight, barX, barY + barHeight, 15);
+    ctx.arcTo(barX, barY + barHeight, barX, barY, 15);
+    ctx.arcTo(barX, barY, barX + 15, barY, 15);
     ctx.fill();
 
     // Draw the current health value
