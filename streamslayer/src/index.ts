@@ -1,12 +1,9 @@
 import { Client } from 'discord.js';
 import config from './config';
 import helpCommand from './commands';
-import WebSocket from 'ws';
 
 const { intents, prefix, token } = config;
-const WEB_SOCKET_URL = 'ws://localhost:3000';
 
-const ws = new WebSocket(WEB_SOCKET_URL);
 
 const client = new Client({
   intents,
@@ -46,14 +43,15 @@ client.on('messageCreate', async (message) => {
         break;
 
       case 'attack':
-      case 'a':
-        console.log('Received !a command');
-        if (ws.readyState === WebSocket.OPEN) {
-            ws.send(JSON.stringify({ action: 'runMove', content: 'Triggered by !a command' }));
-            message.channel.send('Action triggered!');
-        } else {
-            message.channel.send('Failed to trigger action.');
-        }
+      case 'a': {
+        //@ts-expect-error
+        const req  = await fetch("http://localhost:3000/update", {
+          method: 'POST',
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({ update: {}})
+        })
+        await message.channel.send('```js\n' + await req.text() + '\n```')
+      }
     }
   }
 });
